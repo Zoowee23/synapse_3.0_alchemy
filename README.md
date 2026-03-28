@@ -1,372 +1,351 @@
-<div align="center">
+### *AI-Powered Circular Economy Smart Bin Assistant*
 
-# 🌿 Eco Waste Classifier
-
-### *AI-Powered Waste Intelligence for a Sustainable Future*
-
-[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
-[![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white)](https://openstreetmap.org)
-[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
-
-> **Snap. Classify. Recycle. Repeat.**
-
-</div>
+> **Snap. Classify. Guide. Reward. Transform Waste into Value.**
 
 ---
 
-## 📌 Overview
+## 📌 Project Overview
 
-Eco Waste Classifier is a **multi-layer intelligent system** that combines:
+**Eco-Label Vision** is a **full-stack AI-powered waste intelligence platform** designed to tackle the global problem of *improper waste disposal and wish-cycling*.
 
-- Deep Learning (Image Classification)
-- OCR (Resin Code Detection)
-- Rule-Based Decision Systems
-- Geospatial Mapping (Recycling Centers)
-- Sustainability Tracking (Carbon Counter)
-- Gamification (Eco Badges)
-- Local Data Persistence (SQLite)
+It combines:
+
+* 🤖 Computer Vision (Real-time Waste Classification)
+* 🔍 OCR (Plastic Resin Code Detection)
+* 🧠 Rule-Based Decision Engine
+* 🗺️ Geospatial Mapping (Recycling Centers)
+* 🎮 Gamification (XP, Coins, Badges, Games)
+* 💬 AI Chatbot (Sustainability Guidance)
+* 📊 Analytics Dashboards (User + Municipality)
 
 ---
 
 ## 🎯 Problem Statement
 
-Improper waste segregation leads to:
+### ❗ The Core Issue: *Wish-Cycling*
 
-- ❌ Recycling contamination  
-- ❌ Increased landfill waste  
-- ❌ Low environmental awareness  
+People often:
 
-There is **no unified system** that provides:
-- Real-time classification  
-- Disposal guidance  
-- Environmental impact tracking  
-- Municipality-level integration  
+* ❌ Throw non-recyclables into recycling bins
+* ❌ Lack awareness of disposal rules
+* ❌ Don’t see impact of their actions
+
+### 🚫 Consequences:
+
+* Recycling contamination
+* Increased landfill overflow
+* Inefficient municipal systems
 
 ---
 
-## 🚀 Solution
+## 💡 Solution
 
-The system acts as an **AI Waste Assistant**:
+Eco-Label Vision acts as a **Smart Waste Assistant**:
 
-1. 🤖 Classifies waste using deep learning  
-2. 🔍 Detects resin codes using OCR  
-3. ♻️ Provides disposal instructions  
-4. 🗺️ Suggests nearby recycling centers  
-5. 🌱 Tracks carbon savings  
-6. 🏅 Rewards users with eco badges  
-7. 🏙️ Bridges users with municipal waste systems  
+```
+Image Input → AI Classification → OCR → Decision Engine → Guidance + Rewards + Tracking
+```
+
+### Key Outcomes:
+
+* ✅ Correct disposal guidance
+* ✅ Behavioral change through gamification
+* ✅ Real-time environmental impact tracking
+* ✅ Data-driven municipal insights
+
+---
+
+## 🌍 Circular Economy Mapping
+
+| Feature                | Circular Economy Role |
+| ---------------------- | --------------------- |
+| AI Classification      | Waste Identification  |
+| Disposal Guidance      | Proper Segregation    |
+| Carbon Counter         | Impact Awareness      |
+| Recycling Finder       | Resource Loop Closure |
+| Gamification           | Behavior Change       |
+| Municipality Dashboard | System Optimization   |
+
+---
+
+## 🚀 Core Features
+
+---
+
+### 🤖 AI Waste Classification (Scanner System)
+
+* Upload / Webcam / Live Mode scanning
+* MobileNetV3-based classification
+* Top-3 predictions with confidence
+* Voice feedback (Web Speech API)
+
+#### Output:
+
+* Waste category
+* Recyclability status
+* Disposal instructions
+* CO₂ savings
+
+---
+
+### 🔍 OCR Resin Code Detection
+
+* Triggered for plastic items
+* Extracts resin codes (1–7) using EasyOCR
+* Maps recyclability:
+
+| Code | Type              | Recyclability     |
+| ---- | ----------------- | ----------------- |
+| 1–2  | PET, HDPE         | Highly recyclable |
+| 3–6  | PVC, LDPE, PP, PS | Limited           |
+| 7    | Other             | Variable          |
+
+---
+
+### 🧠 Decision Engine
+
+Combines:
+
+* AI prediction
+* Confidence score
+* OCR output
+* Carbon mapping
+
+→ Produces final **disposal recommendation**
+
+---
+
+### 🌱 Carbon Impact Tracker
+
+| Waste Type | CO₂ Saved |
+| ---------- | --------- |
+| Plastic    | 0.08 kg   |
+| Paper      | 0.05 kg   |
+| Cardboard  | 0.06 kg   |
+| Metal      | 0.12 kg   |
+| Glass      | 0.07 kg   |
+
+#### Flow:
+
+```
+Prediction → Carbon Mapping → Accumulate → Display Impact
+```
+
+---
+
+### 🎮 Gamification System
+
+#### Rewards:
+
+* +15 XP (recyclable)
+* +2 XP (non-recyclable)
+* Coins + streak bonuses
+
+#### Levels:
+
+```
+Level = XP / 100
+```
+
+#### Badges:
+
+* 🌱 Seedling
+* ♻️ Beginner Recycler
+* ⚡ Eco Warrior
+* 🏆 Recycling Champion
+* 🌍 Earth Guardian
+* 💎 Zero Waste Hero
+
+---
+
+### 🧩 Interactive Games
+
+#### 1. Bin Guessing Game
+
+* Guess correct bin for items
+* AI-assisted validation
+* Confetti rewards
+
+#### 2. Waste Catcher Game
+
+* Real-time reflex game
+* Falling waste → correct bin
+* Combo system + increasing difficulty
+
+---
+
+### 💬 AI Chatbot (Groq Integration)
+
+* Real-time waste guidance
+* Step-by-step disposal instructions
+* Eco tips for sustainability
+* Fallback rule-based system
+
+---
+
+### 🗺️ Recycling Center Finder
+
+* OpenStreetMap + Overpass API
+* Features:
+
+  * Location search / GPS
+  * Nearby recycling centers
+  * Category filters
+  * Directions
+
+---
+
+### 👤 User Dashboard
+
+* Total scans
+* CO₂ saved
+* XP, coins, streak
+* Badge progress
+* Charts:
+
+  * Pie (waste type)
+  * Bar (recyclable vs non)
+  * Line (carbon trend)
+  * Heatmap (activity)
+
+---
+
+### 🏙️ Municipality Dashboard
+
+* City-wide analytics
+* Recycling rate
+* Waste distribution
+* Top recyclers leaderboard
+* Full user insights
+
+---
+
+### 🔐 Authentication System
+
+* JWT-based authentication
+* Roles:
+
+  * User (citizen)
+  * Municipality (admin)
+* Secure password hashing
+* Protected routes
 
 ---
 
 ## 🏗️ System Architecture
 
-```
+<img width="2732" height="6236" alt="image" src="https://github.com/user-attachments/assets/14dd058b-ff4a-434f-8f82-c391e4b49a0f" />
 
-User / Municipality Interface
-↓
-Preprocessing Layer
-↓
-ML Model (MobileNetV3)
-↓
-OCR Engine (Resin Code)
-↓
-Decision Engine
-(Rules + Carbon + Badges)
-↓
-SQLite Database
-↓
-Map Module (OSM API)
-↓
-Streamlit Frontend
-
-```
 
 ---
 
-## 👥 Dual Interface Design
-
-### 👤 User Interface
-
-- Upload / capture waste image  
-- Get classification + disposal guidance  
-- View carbon savings  
-- Earn eco badges  
-- Track personal history  
-
----
-
-### 🏙️ Municipality Interface
-
-- View aggregated waste trends  
-- Identify recycling patterns  
-- Analyze waste category distribution  
-- Plan better waste management strategies  
-
----
-
-### 🎯 Why This Matters
-
-| User Side | Municipality Side |
-|----------|-----------------|
-| Awareness | Policy planning |
-| Behavior change | Resource allocation |
-| Eco participation | Smart city integration |
-
----
-
-## 🤖 Model Selection & Justification
+## 🤖 AI Model Details
 
 ### Model: MobileNetV3-Small
 
-| Model | Size | Speed | Suitability |
-|------|------|------|------------|
-| VGG16 | Very Large | Slow | ❌ |
-| ResNet50 | Large | Moderate | ❌ |
-| EfficientNet | Medium | Moderate | ⚠️ |
-| MobileNetV3 | Small | Fast | ✅ |
+* Pretrained on ImageNet
+* Fine-tuned for 6 classes
 
----
+### Training Strategy:
 
-### Why MobileNetV3?
+* Epochs: 10
+* Phase 1: Train classifier
+* Phase 2: Fine-tune last layers
 
-- Lightweight (~2.5 MB)
-- Fast CPU inference
-- Pretrained (ImageNet)
-- Optimized for real-time systems
+### Dataset:
 
----
+* 2,527 images
+* 6 categories
 
-## 📊 Dataset
+### Performance:
 
-```
-
-cardboard → Paper
-paper → Paper
-plastic → Plastic
-metal → Metal
-glass → Glass
-
-```
-
-### Why this dataset?
-
-- Real-world waste representation  
-- High variability  
-- Works well with transfer learning  
-
----
-
-## 🔧 Preprocessing
-
-- Resize (224×224)
-- Flip, Rotation
-- Normalize
-
----
-
-## 📈 Performance
-
-| Metric | Value |
-|--------|------|
-| Accuracy | ~80–88% |
-| Inference | < 1 sec |
-
----
-
-## 🔍 OCR Resin Code Detection
-
-Detects plastic types:
-
-| Code | Meaning |
-|------|--------|
-| 1–2 | Highly recyclable |
-| 3–6 | Limited recycling |
-| 7 | Variable |
-
----
-
-## 🌱 Carbon Counter System
-
-### 🎯 Purpose
-Quantify environmental impact of correct waste disposal.
-
----
-
-### 📊 Carbon Mapping
-
-| Waste Type | CO₂ Saved |
-|------------|----------|
-| Plastic | 0.05 kg |
-| Paper | 0.03 kg |
-| Metal | 0.08 kg |
-| Glass | 0.04 kg |
-
----
-
-### ⚙️ Working
-
-```
-
-Prediction → Carbon Mapping → Accumulate → Display Total Impact
-
-```
-
----
-
-### 🧠 Insight
-
-> Encourages behavior change through measurable impact.
-
----
-
-## 🏅 Gamification: Eco Badge System
-
-### 🎯 Goal
-Increase user engagement and habit formation.
-
----
-
-### Badge Levels
-
-| Score | Badge |
-|------|------|
-| 0–5 | Beginner |
-| 5–15 | Eco Warrior |
-| 15+ | Planet Saver |
-
----
-
-### Logic
-
-```
-
-Each classification → +1 score
-Score → Badge level
-
-```
-
----
-
-### 🧠 Impact
-
-- Motivates users  
-- Encourages consistent usage  
-- Builds environmental awareness  
-
----
-
-## 🧠 Decision Engine
-
-Combines:
-- Model prediction
-- Confidence score
-- OCR result
-- Carbon mapping
-
----
-
-## 🗺️ Map Integration (OpenStreetMap)
-
-```
-
-User Location
-→ Geocoding
-→ Recycling Centers
-→ Map Display
-
-```
-
----
-
-## 🗄️ Database (SQLite)
-
-Stores:
-- Predictions
-- Confidence
-- Resin codes
-- Carbon saved
-- Timestamp
-
----
-
-## 🔄 Pipeline
-
-```
-
-Upload Image
-→ Preprocess
-→ Predict
-→ OCR
-→ Apply Rules
-→ Calculate Carbon
-→ Assign Badge
-→ Store Data
-→ Show Map
-
-````
+* Accuracy: 89.93%
+* Inference: < 1 sec
 
 ---
 
 ## ⚙️ Tech Stack
 
-- PyTorch (ML)
-- Tesseract (OCR)
-- OpenStreetMap (Maps)
-- SQLite (DB)
-- Streamlit (UI)
+### Frontend
+
+* React 18 + Vite
+* Tailwind CSS
+* Framer Motion
+* Recharts
+
+### Backend
+
+* FastAPI
+* SQLite
+* JWT Authentication
+
+### AI/ML
+
+* PyTorch
+* MobileNetV3
+
+### Others
+
+* EasyOCR
+* OpenStreetMap APIs
+* Groq AI
 
 ---
 
-## 📉 Limitations
+## 🔌 API Reference
 
-- OCR sensitive to blur  
-- No multi-object detection  
-- Limited dataset  
+### Auth
+
+* `POST /auth/signup`
+* `POST /auth/login`
+* `GET /auth/me`
+
+### Prediction
+
+* `POST /predict`
+* `POST /predict/base64`
+
+### Data
+
+* `GET /history`
+* `GET /stats`
+
+### Municipality
+
+* `GET /municipality/dashboard`
+* `GET /municipality/users`
+
+### Other
+
+* `POST /chat`
+* `GET /recycling-centers`
+* `GET /health`
+
+
+
+## 📸 Screenshots
+
+![WhatsApp Image 2026-03-28 at 2 48 00 PM](https://github.com/user-attachments/assets/160b655b-0cb2-4f60-b0d7-2334d141be86)
+![WhatsApp Image 2026-03-28 at 2 48 45 PM](https://github.com/user-attachments/assets/89c95a68-bf8a-4701-88ae-d86a39a4d5a1)
+![WhatsApp Image 2026-03-28 at 2 50 16 PM](https://github.com/user-attachments/assets/a84bce9b-ef1b-4df5-9c9d-6027c26d25f4)
+
+![WhatsApp Image 2026-03-28 at 2 50 44 PM](https://github.com/user-attachments/assets/072ef175-b387-4a16-a60c-155c034e94b2)
+
+![WhatsApp Image 2026-03-28 at 2 51 07 PM](https://github.com/user-attachments/assets/48a30018-25ec-4c34-9526-9edcc6226561)
+![WhatsApp Image 2026-03-28 at 2 52 18 PM](https://github.com/user-attachments/assets/be6e0645-34cf-46e7-8e35-4fac19c9749f)
+
+![WhatsApp Image 2026-03-28 at 2 52 41 PM](https://github.com/user-attachments/assets/d4a51830-775a-4f05-b8fa-c18a58e5044b)
+![WhatsApp Image 2026-03-28 at 2 52 57 PM](https://github.com/user-attachments/assets/068e6c06-c8e3-4f68-9ea4-ef8b6645f93d)
 
 ---
 
 ## 🔮 Future Scope
 
-- Multi-object detection  
-- GPS auto-location  
-- IoT smart bins  
-- Feedback learning  
+* Multi-object detection
+* IoT Smart Bin integration
+* GPS auto-detection
+* Feedback-based learning
+* Mobile App (Flutter)
 
 ---
-
-## 🧠 Key Insight
-
-> This system goes beyond classification — it integrates AI with sustainability, behavior change, and smart city planning.
-
----
-
-## 🚀 Run Locally
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-````
-
----
-
-## ⭐ Final Thought
-
-Small actions, when multiplied by millions, create massive impact.
-
-Let AI guide better choices 🌍
-
-```
-
----
-
-# 🏆 WHY THIS VERSION IS STRONG
-
-This now shows:
-
-✅ **AI + Systems Thinking**  
-✅ **User + Government perspective**  
-✅ **Impact + Engagement (carbon + badges)**  
-✅ **Not just ML → product mindset**
 
