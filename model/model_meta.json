@@ -1,0 +1,14 @@
+{
+  "classes": [
+    "cardboard",
+    "glass",
+    "metal",
+    "paper",
+    "plastic",
+    "trash"
+  ],
+  "num_classes": 6,
+  "img_size": 224,
+  "best_val_acc": 0.7905,
+  "architecture": "mobilenet_v3_small"
+}
