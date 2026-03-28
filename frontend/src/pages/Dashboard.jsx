@@ -71,18 +71,18 @@ export default function Dashboard() {
         {/* KPI cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label:'Total Scans',    value: stats?.total||0,                     icon:'🔍', color:'#10B981' },
-            { label:'Recycled',       value: stats?.recyclable_count||0,           icon:'♻️', color:'#3B82F6' },
-            { label:'CO₂ Saved (kg)', value: (stats?.carbon_saved||0).toFixed(2), icon:'🌿', color:'#22C55E' },
-            { label:'🪙 Coins',       value: stats?.coins||0,                      icon:'🪙', color:'#FCD34D' },
+            { label: 'Total Scans',    value: stats?.total||0,                     icon: '🔍', color: '#10B981', grad: 'linear-gradient(135deg,#064e3b,#065f46)' },
+            { label: 'Recycled',       value: stats?.recyclable_count||0,           icon: '♻️', color: '#3B82F6', grad: 'linear-gradient(135deg,#1e3a5f,#1d4ed8)' },
+            { label: 'CO₂ Saved (kg)', value: (stats?.carbon_saved||0).toFixed(2), icon: '🌿', color: '#22C55E', grad: 'linear-gradient(135deg,#14532d,#15803d)' },
+            { label: 'Coins',          value: stats?.coins||0,                      icon: '🪙', color: '#FCD34D', grad: 'linear-gradient(135deg,#451a03,#92400e)' },
           ].map(s => (
-            <motion.div key={s.label} whileHover={{ scale:1.03 }}
-              className="rounded-2xl p-5 border text-center"
-              style={{ background: theme.card, borderColor: theme.border }}
+            <motion.div key={s.label} whileHover={{ scale: 1.04, y: -2 }}
+              className="rounded-2xl p-5 text-center relative overflow-hidden"
+              style={{ background: s.grad, border: `1px solid ${s.color}30`, boxShadow: `0 4px 20px ${s.color}20` }}
             >
               <div className="text-3xl mb-2">{s.icon}</div>
-              <div className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</div>
-              <div className="text-xs mt-1" style={{ color: theme.muted }}>{s.label}</div>
+              <div className="text-2xl font-black" style={{ color: s.color }}>{s.value}</div>
+              <div className="text-xs mt-1 font-medium text-white/60">{s.label}</div>
             </motion.div>
           ))}
         </div>

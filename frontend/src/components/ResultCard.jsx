@@ -10,38 +10,53 @@ export default function ResultCard({ result }) {
 
   return (
     <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
-      className="rounded-2xl p-6 border space-y-5"
-      style={{ background: theme.card, borderColor: theme.border }}
+      className="rounded-2xl border overflow-hidden"
+      style={{ background: theme.card, borderColor: theme.border, boxShadow: `0 4px 24px ${color}15` }}
     >
-      {/* Header */}
-      <div className="flex items-center gap-4">
+      {/* Gradient header strip */}
+      <div className="px-6 py-5 flex items-center gap-4"
+        style={{ background: `linear-gradient(135deg, ${color}22, ${color}08)`, borderBottom: `1px solid ${color}20` }}>
         <div className="text-5xl">{EMOJI[prediction] || '♻️'}</div>
         <div>
-          <h2 className="text-2xl font-bold capitalize" style={{ color: theme.text }}>{prediction}</h2>
+          <h2 className="text-2xl font-black capitalize" style={{ color: theme.text }}>{prediction}</h2>
           <div className="mt-1">
             {recyclable ? (
-              <span className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full font-medium"
-                style={{ background:'#10B98120', color:'#10B981' }}>
-                <CheckCircle size={14}/> Recyclable
+              <span className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full font-semibold"
+                style={{ background: '#10B98125', color: '#10B981', border: '1px solid #10B98140' }}>
+                <CheckCircle size={13}/> Recyclable
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full font-medium"
-                style={{ background:'#EF444420', color:'#EF4444' }}>
-                <XCircle size={14}/> Non-Recyclable
+              <span className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full font-semibold"
+                style={{ background: '#EF444425', color: '#EF4444', border: '1px solid #EF444440' }}>
+                <XCircle size={13}/> Non-Recyclable
               </span>
             )}
           </div>
         </div>
       </div>
 
+      <div className="p-6 space-y-5">
+
       {/* Instructional overlay banner */}
       {overlay && (
         <motion.div initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.2 }}
-          className="flex items-start gap-3 px-4 py-3 rounded-xl border-l-4 text-sm font-medium"
-          style={{ background: color+'15', borderLeftColor: color, color: theme.text }}
+          className="rounded-xl border-l-4 overflow-hidden"
+          style={{ borderLeftColor: color }}
         >
-          <Info size={18} style={{ color, flexShrink:0, marginTop:1 }} />
-          <span>{overlay}</span>
+          <div className="px-4 py-3 text-sm font-semibold flex items-start gap-2"
+            style={{ background: color+'18', color: theme.text }}>
+            <Info size={18} style={{ color, flexShrink:0, marginTop:1 }} />
+            <span>{overlay}</span>
+          </div>
+          {/* Step-by-step prep guide */}
+          <div className="px-4 py-2 text-xs space-y-1" style={{ background: color+'08', color: theme.muted }}>
+            <p className="font-semibold" style={{ color: theme.text }}>How to prepare:</p>
+            {instructions.slice(0,3).map((inst, i) => (
+              <p key={i} className="flex items-start gap-1.5">
+                <span className="font-bold" style={{ color }}>{i+1}.</span> {inst}
+              </p>
+            ))}
+          </div>
         </motion.div>
       )}
 
@@ -108,6 +123,7 @@ export default function ResultCard({ result }) {
           </div>
         </motion.div>
       )}
+      </div>
     </motion.div>
   )
 }

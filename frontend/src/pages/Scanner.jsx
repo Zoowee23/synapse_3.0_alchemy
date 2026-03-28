@@ -12,6 +12,8 @@ import CompareView from '../components/CompareView'
 import GamificationPopup from '../components/GamificationPopup'
 import RecyclingMap from '../components/RecyclingMap'
 
+import BinGame from '../components/BinGame'
+
 export default function Scanner() {
   const [mode,    setMode]    = useState('upload')
   const [result,  setResult]  = useState(null)
@@ -84,25 +86,28 @@ export default function Scanner() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 py-8 space-y-6">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-2" style={{ color: theme.text }}>
-            ♻️ Smart Waste Scanner
+          <h1 className="text-4xl font-black mb-2 gradient-text">
+            Smart Waste Scanner
           </h1>
-          <p style={{ color: theme.muted }}>Upload or scan an item for instant AI classification</p>
+          <p className="text-base" style={{ color: theme.muted }}>
+            Upload or scan an item for instant AI classification & disposal instructions
+          </p>
         </div>
 
         {/* Mode tabs */}
         <div className="flex gap-2 justify-center flex-wrap">
           {[
-            { key:'upload',  label:'Upload',  icon:'📤' },
-            { key:'webcam',  label:'Webcam',  icon:'📷' },
-            { key:'compare', label:'Compare', icon:'⚖️' },
-            { key:'map',     label:'Find Bins',icon:'🗺️' },
+            { key:'upload',  label:'Upload',    icon:'📤' },
+            { key:'webcam',  label:'Webcam',    icon:'📷' },
+            { key:'game',    label:'Bin Game',  icon:'🎮' },
+            { key:'compare', label:'Compare',   icon:'⚖️' },
+            { key:'map',     label:'Find Bins', icon:'🗺️' },
           ].map(m => (
             <button key={m.key} onClick={() => { setMode(m.key); reset() }}
-              className="px-5 py-2 rounded-xl font-medium text-sm transition-all flex items-center gap-1.5"
-              style={mode===m.key
-                ? { background: theme.accent, color:'#fff' }
-                : { background: theme.card, color: theme.muted, border:`1px solid ${theme.border}` }
+              className="px-5 py-2.5 rounded-xl font-semibold text-sm transition-all flex items-center gap-1.5"
+              style={mode === m.key
+                ? { background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentHover})`, color: '#fff', boxShadow: `0 2px 14px ${theme.accent}40` }
+                : { background: theme.card, color: theme.muted, border: `1px solid ${theme.border}` }
               }
             >{m.icon} {m.label}</button>
           ))}
@@ -114,6 +119,10 @@ export default function Scanner() {
           </div>
         ) : mode === 'compare' ? (
           <CompareView />
+        ) : mode === 'game' ? (
+          <div className="rounded-2xl p-6 border" style={{ background: theme.card, borderColor: theme.border }}>
+            <BinGame />
+          </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
             {/* Input panel */}
