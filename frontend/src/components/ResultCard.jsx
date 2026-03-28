@@ -1,114 +1,112 @@
 import { motion } from 'framer-motion'
-import { CheckCircle, XCircle, Trash2, Leaf } from 'lucide-react'
+import { CheckCircle, XCircle, Leaf, Info } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
 
-const CATEGORY_EMOJI = {
-  plastic:   '🧴',
-  paper:     '📄',
-  cardboard: '📦',
-  metal:     '🥫',
-  glass:     '🍶',
-  trash:     '🗑️',
-}
+const EMOJI = { plastic:'🧴', paper:'📄', cardboard:'📦', metal:'🥫', glass:'🍶', trash:'🗑️' }
 
 export default function ResultCard({ result }) {
-  const {
-    prediction, confidence, top3,
-    recyclable, bin, instructions,
-    carbon_saved, color,
-  } = result
+  const { prediction, confidence, top3, recyclable, bin, instructions, carbon_saved, color, overlay } = result
+  const { theme } = useTheme()
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      className="card space-y-5"
+    <motion.div initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
+      className="rounded-2xl p-6 border space-y-5"
+      style={{ background: theme.card, borderColor: theme.border }}
     >
       {/* Header */}
       <div className="flex items-center gap-4">
-        <div className="text-5xl">{CATEGORY_EMOJI[prediction] || '♻️'}</div>
+        <div className="text-5xl">{EMOJI[prediction] || '♻️'}</div>
         <div>
-          <h2 className="text-2xl font-bold capitalize text-white">{prediction}</h2>
-          <div className="flex items-center gap-2 mt-1">
+          <h2 className="text-2xl font-bold capitalize" style={{ color: theme.text }}>{prediction}</h2>
+          <div className="mt-1">
             {recyclable ? (
-              <span className="flex items-center gap-1 bg-emerald-500/20 text-emerald-400 text-sm px-3 py-1 rounded-full font-medium">
-                <CheckCircle size={14} /> Recyclable
+              <span className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full font-medium"
+                style={{ background:'#10B98120', color:'#10B981' }}>
+                <CheckCircle size={14}/> Recyclable
               </span>
             ) : (
-              <span className="flex items-center gap-1 bg-red-500/20 text-red-400 text-sm px-3 py-1 rounded-full font-medium">
-                <XCircle size={14} /> Non-Recyclable
+              <span className="inline-flex items-center gap-1 text-sm px-3 py-1 rounded-full font-medium"
+                style={{ background:'#EF444420', color:'#EF4444' }}>
+                <XCircle size={14}/> Non-Recyclable
               </span>
             )}
           </div>
         </div>
       </div>
 
+      {/* Instructional overlay banner */}
+      {overlay && (
+        <motion.div initial={{ opacity:0, x:-10 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.2 }}
+          className="flex items-start gap-3 px-4 py-3 rounded-xl border-l-4 text-sm font-medium"
+          style={{ background: color+'15', borderLeftColor: color, color: theme.text }}
+        >
+          <Info size={18} style={{ color, flexShrink:0, marginTop:1 }} />
+          <span>{overlay}</span>
+        </motion.div>
+      )}
+
       {/* Confidence bar */}
       <div>
-        <div className="flex justify-between text-sm mb-1">
-          <span className="text-slate-400">Confidence</span>
-          <span className="text-white font-semibold">{(confidence * 100).toFixed(1)}%</span>
+        <div className="flex justify-between text-sm mb-1.5">
+          <span style={{ color: theme.muted }}>Confidence</span>
+          <span className="font-bold" style={{ color: theme.text }}>{(confidence*100).toFixed(1)}%</span>
         </div>
-        <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${confidence * 100}%` }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="h-full rounded-full"
-            style={{ backgroundColor: color }}
+        <div className="h-3 rounded-full overflow-hidden" style={{ background: theme.bg }}>
+          <motion.div initial={{ width:0 }} animate={{ width:`${confidence*100}%` }}
+            transition={{ duration:0.8, ease:'easeOut' }}
+            className="h-full rounded-full" style={{ background: color }}
           />
         </div>
       </div>
 
       {/* Top 3 */}
       <div>
-        <p className="text-slate-400 text-sm mb-2">Top Predictions</p>
+        <p className="text-sm mb-2 font-medium" style={{ color: theme.muted }}>Top Predictions</p>
         <div className="space-y-2">
           {top3.map((item, i) => (
             <div key={i} className="flex items-center gap-3">
-              <span className="text-slate-400 text-xs w-16 capitalize">{item.label}</span>
-              <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-slate-400"
-                  style={{ width: `${item.confidence * 100}%`, opacity: 1 - i * 0.3 }}
-                />
+              <span className="text-xs w-16 capitalize" style={{ color: theme.muted }}>{item.label}</span>
+              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: theme.bg }}>
+                <div className="h-full rounded-full" style={{ width:`${item.confidence*100}%`, background: theme.accent, opacity: 1-i*0.3 }} />
               </div>
-              <span className="text-slate-300 text-xs w-12 text-right">
-                {(item.confidence * 100).toFixed(1)}%
-              </span>
+              <span className="text-xs w-12 text-right" style={{ color: theme.text }}>{(item.confidence*100).toFixed(1)}%</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Bin */}
-      <div className="bg-slate-700/50 rounded-xl p-4">
-        <p className="text-slate-400 text-xs mb-1">Disposal Bin</p>
-        <p className="text-white font-semibold text-lg">🗑️ {bin}</p>
+      <div className="rounded-xl p-4" style={{ background: theme.bg }}>
+        <p className="text-xs mb-1" style={{ color: theme.muted }}>Disposal Bin</p>
+        <p className="font-bold text-lg" style={{ color: theme.text }}>🗑️ {bin}</p>
       </div>
 
       {/* Instructions */}
       <div>
-        <p className="text-slate-400 text-sm mb-2">Instructions</p>
-        <ul className="space-y-1">
+        <p className="text-sm mb-2 font-medium" style={{ color: theme.muted }}>Instructions</p>
+        <ul className="space-y-1.5">
           {instructions.map((inst, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
-              <span className="text-emerald-400 mt-0.5">•</span>
-              {inst}
-            </li>
+            <motion.li key={i} initial={{ opacity:0, x:-8 }} animate={{ opacity:1, x:0 }} transition={{ delay: i*0.08 }}
+              className="flex items-start gap-2 text-sm" style={{ color: theme.text }}
+            >
+              <span style={{ color: theme.accent, marginTop:2 }}>•</span>{inst}
+            </motion.li>
           ))}
         </ul>
       </div>
 
       {/* Carbon saved */}
       {carbon_saved > 0 && (
-        <div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3">
-          <Leaf size={20} className="text-emerald-400" />
+        <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:0.4 }}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl border"
+          style={{ background:'#10B98110', borderColor:'#10B98130' }}
+        >
+          <Leaf size={20} style={{ color:'#10B981' }} />
           <div>
-            <p className="text-emerald-400 font-semibold text-sm">+{carbon_saved} kg CO₂ saved</p>
-            <p className="text-slate-400 text-xs">by recycling this item correctly</p>
+            <p className="font-semibold text-sm" style={{ color:'#10B981' }}>+{carbon_saved} kg CO₂ saved</p>
+            <p className="text-xs" style={{ color: theme.muted }}>by recycling this item correctly</p>
           </div>
-        </div>
+        </motion.div>
       )}
     </motion.div>
   )
