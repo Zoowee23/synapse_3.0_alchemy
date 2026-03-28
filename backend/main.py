@@ -2,7 +2,7 @@
 Eco-Label Vision - FastAPI Backend
 Auth (JWT) + SQLite + Groq Chatbot + Recycling Centers
 """
-import io, json, base64, logging, sqlite3, os, hashlib
+import io, json, base64, logging, sqlite3, os, hashlib, tempfile
 from contextlib import contextmanager, asynccontextmanager
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -24,6 +24,13 @@ try:
     GROQ_AVAILABLE = True
 except ImportError:
     GROQ_AVAILABLE = False
+
+try:
+    from resin_model import detect_resin
+    RESIN_AVAILABLE = True
+except ImportError:
+    RESIN_AVAILABLE = False
+    def detect_resin(path): return None
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("eco-label")
@@ -324,6 +331,23 @@ def _build_result(pred, conf, top3):
     return {**info, "prediction": pred, "confidence": conf, "top3": top3}
 
 
+def _add_resin(result: dict, image: Image.Image) -> dict:
+    """If prediction is plastic, run OCR resin detection and attach to result."""
+    if result.get("prediction") != "plastic":
+        return result
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as tmp:
+            image.convert("RGB").save(tmp.name, "JPEG")
+            tmp_path = tmp.name
+        resin = detect_resin(tmp_path)
+        os.unlink(tmp_path)
+        if resin:
+            result["resin"] = resin
+    except Exception as e:
+        logger.warning("Resin detection error: %s", e)
+    return result
+
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...), user=Depends(get_current_user)):
     if classifier.model is None:
@@ -334,6 +358,7 @@ async def predict(file: UploadFile = File(...), user=Depends(get_current_user)):
         raise HTTPException(400, "Invalid image file")
     pred, conf, top3 = classifier.predict(image)
     result = _build_result(pred, conf, top3)
+    result = _add_resin(result, image)
     ts = datetime.now(timezone.utc).isoformat()
     with get_db() as conn:
         conn.execute(
@@ -359,6 +384,7 @@ async def predict_b64(payload: dict, user=Depends(get_current_user)):
         raise HTTPException(400, "Invalid base64 image")
     pred, conf, top3 = classifier.predict(image)
     result = _build_result(pred, conf, top3)
+    result = _add_resin(result, image)
     ts = datetime.now(timezone.utc).isoformat()
     with get_db() as conn:
         conn.execute(

@@ -212,6 +212,39 @@ export default function Dashboard() {
             </div>
           </div>
         )}
+
+        {/* Activity heatmap — last 10 weeks */}
+        {history.length > 0 && (() => {
+          const today = new Date()
+          const cells = Array.from({ length: 70 }, (_, i) => {
+            const d = new Date(today)
+            d.setDate(today.getDate() - (69 - i))
+            const key = d.toISOString().slice(0, 10)
+            const count = history.filter(h => h.timestamp?.slice(0, 10) === key).length
+            return { key, count }
+          })
+          const maxCount = Math.max(...cells.map(c => c.count), 1)
+          return (
+            <div className="rounded-2xl p-6 border" style={{ background: theme.card, borderColor: theme.border }}>
+              <h2 className="font-bold mb-4" style={{ color: theme.text }}>Activity Heatmap</h2>
+              <div className="flex flex-wrap gap-1">
+                {cells.map(c => (
+                  <div key={c.key} title={`${c.key}: ${c.count} scan${c.count !== 1 ? 's' : ''}`}
+                    className="rounded-sm"
+                    style={{
+                      width: 14, height: 14,
+                      background: c.count === 0
+                        ? theme.bg
+                        : `rgba(16,185,129,${0.2 + (c.count / maxCount) * 0.8})`,
+                      border: `1px solid ${theme.border}`,
+                    }}
+                  />
+                ))}
+              </div>
+              <p className="text-xs mt-2" style={{ color: theme.muted }}>Last 10 weeks of scanning activity</p>
+            </div>
+          )
+        })()}
       </div>
     </div>
   )

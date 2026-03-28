@@ -13,6 +13,7 @@ import GamificationPopup from '../components/GamificationPopup'
 import RecyclingMap from '../components/RecyclingMap'
 
 import BinGame from '../components/BinGame'
+import WasteCatcher from '../components/WasteCatcher'
 
 export default function Scanner() {
   const [mode,    setMode]    = useState('upload')
@@ -100,6 +101,7 @@ export default function Scanner() {
             { key:'upload',  label:'Upload',    icon:'📤' },
             { key:'webcam',  label:'Webcam',    icon:'📷' },
             { key:'game',    label:'Bin Game',  icon:'🎮' },
+            { key:'catcher', label:'Catcher',   icon:'🥛' },
             { key:'compare', label:'Compare',   icon:'⚖️' },
             { key:'map',     label:'Find Bins', icon:'🗺️' },
           ].map(m => (
@@ -122,6 +124,10 @@ export default function Scanner() {
         ) : mode === 'game' ? (
           <div className="rounded-2xl p-6 border" style={{ background: theme.card, borderColor: theme.border }}>
             <BinGame />
+          </div>
+        ) : mode === 'catcher' ? (
+          <div className="rounded-2xl p-6 border" style={{ background: theme.card, borderColor: theme.border }}>
+            <WasteCatcher />
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">

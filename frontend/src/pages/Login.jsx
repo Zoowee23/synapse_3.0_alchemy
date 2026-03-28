@@ -108,7 +108,7 @@ export default function Login() {
 
         {/* Bottom stats */}
         <div className="relative z-10 flex gap-8">
-          {[['6','Waste Categories'],['95%','Model Accuracy'],['5','Themes']].map(([val, label]) => (
+          {[['6','Waste Categories'],['89.93%','Model Accuracy'],['5','Themes']].map(([val, label]) => (
             <div key={label}>
               <div className="text-2xl font-black" style={{ color: theme.accent }}>{val}</div>
               <div className="text-xs" style={{ color: theme.muted }}>{label}</div>

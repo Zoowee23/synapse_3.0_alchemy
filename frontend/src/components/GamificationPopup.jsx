@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { sounds } from '../hooks/useSound'
 
 /* ── Confetti particle for recyclable ── */
 const CONFETTI_COLORS = ['#10B981','#34D399','#FCD34D','#60A5FA','#A78BFA','#F472B6']
@@ -73,6 +74,12 @@ function BadgeUnlock({ badges }) {
 function PositivePopup({ data, onClose }) {
   const coins    = Array.from({ length: Math.min(data.coins_gained || 5, 10) }, (_, i) => i)
   const confetti = Array.from({ length: 20 }, (_, i) => i)
+
+  useEffect(() => {
+    sounds.correct()
+    if (data.coins_gained > 0) setTimeout(() => sounds.coin(), 300)
+    if (data.new_badges?.length) setTimeout(() => sounds.badge(), 600)
+  }, [])
 
   return (
     <motion.div
@@ -169,6 +176,8 @@ const NEGATIVE_MESSAGES = [
 function NegativePopup({ data, onClose }) {
   const msg = NEGATIVE_MESSAGES[Math.floor(Math.random() * NEGATIVE_MESSAGES.length)]
   const particles = Array.from({ length: 6 }, (_, i) => i)
+
+  useEffect(() => { sounds.miss() }, [])
 
   return (
     <motion.div

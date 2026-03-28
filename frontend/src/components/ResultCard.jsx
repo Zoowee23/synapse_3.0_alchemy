@@ -5,7 +5,7 @@ import { useTheme } from '../context/ThemeContext'
 const EMOJI = { plastic:'🧴', paper:'📄', cardboard:'📦', metal:'🥫', glass:'🍶', trash:'🗑️' }
 
 export default function ResultCard({ result }) {
-  const { prediction, confidence, top3, recyclable, bin, instructions, carbon_saved, color, overlay } = result
+  const { prediction, confidence, top3, recyclable, bin, instructions, carbon_saved, color, overlay, resin } = result
   const { theme } = useTheme()
 
   return (
@@ -95,6 +95,28 @@ export default function ResultCard({ result }) {
         <p className="text-xs mb-1" style={{ color: theme.muted }}>Disposal Bin</p>
         <p className="font-bold text-lg" style={{ color: theme.text }}>🗑️ {bin}</p>
       </div>
+
+      {/* Resin code — plastic only */}
+      {resin && (
+        <motion.div
+          initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
+          className="rounded-xl p-4 border"
+          style={{ background: '#3B82F610', borderColor: '#3B82F640' }}
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-xl shrink-0"
+              style={{ background: '#3B82F6', color: '#fff' }}>
+              {resin.code}
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide mb-0.5" style={{ color: '#3B82F6' }}>
+                Resin Code {resin.code}
+              </p>
+              <p className="font-bold text-sm" style={{ color: theme.text }}>{resin.info}</p>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       {/* Instructions */}
       <div>
