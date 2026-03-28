@@ -3,6 +3,7 @@
 > **Snap. Classify. Guide. Reward. Transform Waste into Value.**
 
 ---
+Demo video: https://drive.google.com/file/d/1avAfkswomB18eekNRs_U0MVZjwX3i95i/view?usp=sharing 
 
 ## 📌 Project Overview
 
